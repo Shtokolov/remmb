@@ -23,12 +23,12 @@ class Note extends Component{
                       &times;
                 </span>
             </div>
-        )
+        );
     }
 }
 
 Note.propTypes = {
-    noteContent: PropTypes.string
-}
+  noteContent: PropTypes.string
+};
 
 export default Note;

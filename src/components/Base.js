@@ -41,4 +41,4 @@ ui.start('#firebaseui-auth-container', uiConfig);
 
 
 
-export { base }
+export { base };

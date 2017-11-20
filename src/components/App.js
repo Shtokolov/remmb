@@ -3,7 +3,8 @@ import './App.css';
 import Note from './Note';
 import NoteForm from './NoteForm';
 import firebase from 'firebase';
-
+import Login from './Login';
+import scrollToComponent from 'react-scroll-to-component';
 
 class App extends Component {
   constructor(props){
@@ -19,11 +20,13 @@ class App extends Component {
       messagingSenderId: process.env.REACT_APP_FIREBASE_666763911284
     };
     this.app = firebase.initializeApp(config);
-    this.database = this.app.database().ref().child('notes');
+    this.database = this.app.database().ref().child("notes");
+    this.noteList = this.app.database().ref().child("notes");
 
     this.state = {
       notes: [],
-    }
+      noteNode: []
+    };
   }
 
 
@@ -35,12 +38,12 @@ class App extends Component {
       previousNotes.push({
         id: snap.key,
         noteContent: snap.val().noteContent,
-      })
+      });
 
       this.setState({
         notes: previousNotes
-      })
-    })
+      });
+    });
 
     this.database.on('child_removed', snap => {
       for(let i=0; i < previousNotes.length; i++){
@@ -51,13 +54,38 @@ class App extends Component {
 
       this.setState({
         notes: previousNotes
-      })
-    })
+      });
+    });
   }
 
 
   componentDidMount(){
-        document.querySelector(".noteInput").focus();
+    document.querySelector(".noteInput").focus();
+    if (this.state.notes.length > 0) {
+      this.notesHeaderNode.classList.add("haveSomeNotes");
+      this.notesBodyNode.classList.add("haveSomeNotes");
+      this.notesFooterNode.classList.add("haveSomeNotes");
+    }
+    else {
+      this.notesHeaderNode.classList.remove("haveSomeNotes");
+      this.notesBodyNode.classList.remove("haveSomeNotes");
+      this.notesFooterNode.classList.remove("haveSomeNotes");
+    }
+  }
+
+
+  componentDidUpdate() {
+    if (this.state.notes.length > 0) {
+      this.notesHeaderNode.classList.add("haveSomeNotes");
+      this.notesBodyNode.classList.add("haveSomeNotes");
+      this.notesFooterNode.classList.add("haveSomeNotes");
+
+    }
+    else {
+      this.notesHeaderNode.classList.remove("haveSomeNotes");
+      this.notesBodyNode.classList.remove("haveSomeNotes");
+      this.notesFooterNode.classList.remove("haveSomeNotes");
+    }
   }
 
 
@@ -74,22 +102,23 @@ class App extends Component {
   render() {
     return (
       <div className="notesWrapper">
-        <div className="notesHeader">
+        <div className="notesHeader" ref={node => { this.notesHeaderNode = node }}>
           <div className="heading">REMMB</div>
         </div>
-        <div className="notesBody">
+
+        <div className="notesBody" ref={node => { this.notesBodyNode = node }}>
           {
             this.state.notes.map((note) => {
               return (
                 <Note noteContent={note.noteContent}
                 noteId={note.id}
                 key={note.id}
-                removeNote ={this.removeNote}/>
-              )
+                removeNote={this.removeNote}/>
+              );
             })
           }
         </div>
-        <div className="notesFooter">
+        <div className="notesFooter" ref={node => { this.notesFooterNode = node }}>
           <NoteForm addNote={this.addNote} />
         </div>
       </div>

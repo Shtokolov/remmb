@@ -7,74 +7,82 @@ html{
 body {
   width: 100%;
   min-height:100%;
-background-color: #48c6ef;
+  background-color: #48c6ef;
   background-attachment: fixed;
   background-size: cover;
 }
 
 * {
-  height: 100%;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   border: 0;
+  transition: all .3s;
 }
 
 .heading {
-  margin-top: 10px;
+  margin-top: 2%;
+  display: flex;
+
 }
 
 .notesWrapper {
   display: flex;
-  flex: 1 1 auto;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
 }
 
 .notesHeader {
   font-family: 'Permanent Marker', cursive;
   display: flex;
-  flex: 1 1 5%;
-  min-height: 2.5em;
-  max-height: 2em;
-  font-size: 6.2em;
+  justify-content: center;
+  align-items: flex-end;
+  flex: 0 0 40%;
+  font-size: 8em;
   text-shadow: 4px 4px #4481eb;
   color: #fff;
   text-align: center;
   align-content: center;
-  padding:20px 0px 20px 0px;
-  margin-bottom: 6px;
-  display: block;
+}
+
+.notesHeader.haveSomeNotes {
+  font-size: 6.2em;
+  margin-top: 20px;
+  flex: 0 0 20%;
 }
 
 .notesBody {
+  flex: 1 1 0%;
+  max-height: 50vh;
   z-index: 10;
+  padding: 20px 0 0 0;
   display: flex;
-  flex: 1 1 85%;
   flex-wrap: wrap;
   align-items: flex-start;
   align-content: flex-start;
   overflow: auto;
+
+}
+
+.notesBody.haveSomeNotes {
+  flex: 1 1 50%;
+}
+
+.note:last-child {
+   margin-bottom: 80px;
 }
 
 .notesFooter {
+  flex: 0 0 50%;
   z-index: 20;
   display: flex;
   -webkit-box-shadow: rgb(72, 198, 239) 1px -20px 82px 40px;
   -moz-box-shadow: rgb(72, 198, 239) 1px -20px 82px 40px;
   box-shadow: rgb(72, 198, 239) 1px -20px 82px 40px;
-  flex: 1 1 20%;
-  margin-bottom: 10%;
 }
 
-.noNotes {
-  flex: 1 1 30%;
-  margin-bottom: 10%;
-}
-
-.haveNotes {
-  flex: 1 1 20%;
-  margin-bottom: 10%;
+.notesFooter.haveSomeNotes {
+  flex: 0 0 20%;
 }
 
 .note {
@@ -132,19 +140,23 @@ background-color: #48c6ef;
 }
 
 .formWrapper{
-  padding-top: 30px;
-    width: 60%;
-    margin: auto;
+  width: 60%;
+  margin: 0  auto;
+  height: 65px;
+}
+
+.mainForm {
+  height: 100%;
 }
 
 .noteButton{
     min-height: 52px;
     width: 20%;
+    height: 100%;
     border: none;
     margin: 0px;
     box-shadow: 1px 5px 30px #4481C3;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border-radius: 0 4px 4px 0;
     padding: 8px;
     font-size: 1.3em;
     background-color: #4481eb;
@@ -152,6 +164,10 @@ background-color: #48c6ef;
     transition: 0.2s ease-out;
     outline: unset;
     cursor: pointer;
+}
+
+.noteButton_error{
+  background-color: #860101 !important;
 }
 
 .noteButton:hover{
@@ -163,6 +179,7 @@ background-color: #48c6ef;
 .noteInput{
     box-shadow: 1px 5px 30px #4481C3;
     min-height: 52px;
+    height: 100%;
     float: left;
     width: 80%;
     font-size: 1.3em;
@@ -181,10 +198,24 @@ background-color: #48c6ef;
     transition: 0.2s ease-in;
 }
 
-.shake {
-  animation: shake-keyframes 1s;
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
-@keyframes shake-keyframes {
-  from {opacity: 0}
-  to {opacity: 1}
+
+.apply-shake {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
 }
