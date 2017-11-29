@@ -102,11 +102,11 @@ class App extends Component {
   render() {
     return (
       <div className="notesWrapper">
-        <div className="notesHeader" ref={node => { this.notesHeaderNode = node }}>
+        <div className="notesHeader" ref={node => { this.notesHeaderNode = node; }}>
           <div className="heading">REMMB</div>
         </div>
 
-        <div className="notesBody" ref={node => { this.notesBodyNode = node }}>
+        <div className="notesBody" ref={node => { this.notesBodyNode = node; }}>
           {
             this.state.notes.map((note) => {
               return (
@@ -118,7 +118,7 @@ class App extends Component {
             })
           }
         </div>
-        <div className="notesFooter" ref={node => { this.notesFooterNode = node }}>
+        <div className="notesFooter" ref={node => { this.notesFooterNode = node; }}>
           <NoteForm addNote={this.addNote} />
         </div>
       </div>

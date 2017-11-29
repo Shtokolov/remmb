@@ -18,12 +18,22 @@ body {
   padding: 0;
   border: 0;
   transition: all .3s;
+  -webkit-transition: all 600ms cubic-bezier(0.705, 0, 0.285, 1); /* older webkit */
+  -webkit-transition: all 600ms cubic-bezier(0.705, -0.470, 0.285, 1.455);
+     -moz-transition: all 600ms cubic-bezier(0.705, -0.470, 0.285, 1.455);
+       -o-transition: all 600ms cubic-bezier(0.705, -0.470, 0.285, 1.455);
+          transition: all 600ms cubic-bezier(0.705, -0.470, 0.285, 1.455); /* custom */
+
+  -webkit-transition-timing-function: cubic-bezier(0.705, 0, 0.285, 1); /* older webkit */
+  -webkit-transition-timing-function: cubic-bezier(0.705, -0.470, 0.285, 1.455);
+     -moz-transition-timing-function: cubic-bezier(0.705, -0.470, 0.285, 1.455);
+       -o-transition-timing-function: cubic-bezier(0.705, -0.470, 0.285, 1.455);
+          transition-timing-function: cubic-bezier(0.705, -0.470, 0.285, 1.455); /* custom */
 }
 
 .heading {
   margin-top: 2%;
   display: flex;
-
 }
 
 .notesWrapper {
@@ -49,6 +59,7 @@ body {
   font-size: 6.2em;
   margin-top: 20px;
   flex: 0 0 20%;
+  transition: all 0.3s easy;
 }
 
 .notesBody {
@@ -61,11 +72,11 @@ body {
   align-items: flex-start;
   align-content: flex-start;
   overflow: auto;
-
 }
 
 .notesBody.haveSomeNotes {
   flex: 1 1 50%;
+
 }
 
 .note:last-child {
