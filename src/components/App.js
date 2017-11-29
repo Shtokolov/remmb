@@ -58,9 +58,7 @@ class App extends Component {
     });
   }
 
-
-  componentDidMount(){
-    document.querySelector(".noteInput").focus();
+  togglNotesStyle() {
     if (this.state.notes.length > 0) {
       this.notesHeaderNode.classList.add("haveSomeNotes");
       this.notesBodyNode.classList.add("haveSomeNotes");
@@ -71,21 +69,16 @@ class App extends Component {
       this.notesBodyNode.classList.remove("haveSomeNotes");
       this.notesFooterNode.classList.remove("haveSomeNotes");
     }
+ }
+
+  componentDidMount(){
+    document.querySelector(".noteInput").focus();
+    this.togglNotesStyle();
   }
 
 
   componentDidUpdate() {
-    if (this.state.notes.length > 0) {
-      this.notesHeaderNode.classList.add("haveSomeNotes");
-      this.notesBodyNode.classList.add("haveSomeNotes");
-      this.notesFooterNode.classList.add("haveSomeNotes");
-
-    }
-    else {
-      this.notesHeaderNode.classList.remove("haveSomeNotes");
-      this.notesBodyNode.classList.remove("haveSomeNotes");
-      this.notesFooterNode.classList.remove("haveSomeNotes");
-    }
+    this.togglNotesStyle();
   }
 
 
